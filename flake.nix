@@ -16,19 +16,15 @@
       # $ nix-env -qaP | grep wget
       environment.systemPackages =
         [ 
-		pkgs.vim
-		pkgs.starship
+          pkgs.vim
         ];
-	
-	environment.shellAliases = {
-	 nixSwitch = "darwin-rebuild switch --flake ~/.config/nix-darwin";
-	};
+
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
       # nix.package = pkgs.nix;
 
-	    users.users.n3utrino.home = "/Users/n3utrino";
+      users.users.n3utrino.home = "/Users/n3utrino";
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
@@ -43,6 +39,9 @@
       # $ darwin-rebuild changelog
       system.stateVersion = 4;
 
+# enable fingerprint sudo 
+security.pam.enableSudoTouchIdAuth = true;
+
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "x86_64-darwin";
     };
@@ -52,12 +51,12 @@
     # $ darwin-rebuild build --flake .#Gabes-MacBook-Pro
     darwinConfigurations."Gabes-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       modules = [ 
-      configuration
-      home-manager.darwinModules.home-manager {
-	home-manager.useGlobalPkgs = true;
-        home-manager.useUserPackages = true;
-	home-manager.users.n3utrino = import ./home.nix;
-      }
+        configuration
+        home-manager.darwinModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.n3utrino = import ./home.nix;
+        }
       ];
     };
 
