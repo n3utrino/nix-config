@@ -17,6 +17,7 @@
       environment.systemPackages =
         [ 
 		pkgs.vim
+		pkgs.starship
         ];
 	
 	environment.shellAliases = {
@@ -27,6 +28,7 @@
       services.nix-daemon.enable = true;
       # nix.package = pkgs.nix;
 
+	    users.users.n3utrino.home = "/Users/n3utrino";
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
