@@ -17,8 +17,16 @@
       environment.systemPackages =
         [ 
           pkgs.vim
+          pkgs.fzf
+          pkgs.pam-reattach
+          pkgs.coreutils-full
         ];
 
+        fonts.fontDir.enable = true;
+        fonts.fonts = [
+          (pkgs.nerdfonts.override {fonts = ["FiraCode" "FiraMono" "IBMPlexMono"];})
+        ];
+        
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
@@ -29,18 +37,30 @@
       nix.settings.experimental-features = "nix-command flakes";
 
       # Create /etc/zshrc that loads the nix-darwin environment.
-      programs.zsh.enable = true;  # default shell on catalina
-      # programs.fish.enable = true;
+      programs.zsh = {
+        enable = true;  # default shell on catalina
+        enableFzfCompletion = true;
+      };
 
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
+
+      system.defaults.finder = {
+        AppleShowAllExtensions = true;
+        AppleShowAllFiles = true;
+      };
+
+      system.defaults.dock = {
+        orientation = "left";
+        autohide = true;
+      };
 
       # Used for backwards compatibility, please read the changelog before changing.
       # $ darwin-rebuild changelog
       system.stateVersion = 4;
 
-# enable fingerprint sudo 
-security.pam.enableSudoTouchIdAuth = true;
+      # enable fingerprint sudo 
+      security.pam.enableSudoTouchIdAuth = true;
 
       # The platform the configuration will be used on.
       nixpkgs.hostPlatform = "x86_64-darwin";

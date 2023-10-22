@@ -12,7 +12,7 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-imports = [ ./vim.nix];
+imports = [ ./vim.nix ./terminal.nix ];
 
   home.packages = [
     # # Adds the 'hello' command to your environment. It prints a friendly
@@ -45,16 +45,26 @@ imports = [ ./vim.nix];
 	ping = "prettyping";
 	nix-switch = "darwin-rebuild switch --flake ~/.config/nix-darwin";
 	nix-config = "nvim ~/.config/nix-darwin";
-	nix-update = "nix-channel --update";
+        nix-update = "nix-channel --update";
+        ls = "ls --color";
+        ll = "ls -l --color";
   };
 
   programs = {
   	java.enable=true;
   	direnv.enable=true;
   	zsh.enable=true;
-  	alacritty.enable=true;
-  };
-  # Home Manager is pretty good at managing dotfiles. The primary way to manage
+  	fish.enable=true;
+      };
+
+      programs.tmux = {
+        enable = true;
+        terminal = "tmux-256color";
+        plugins = with pkgs; 
+        [tmuxPlugins.nord];
+      };
+
+ # Home Manager is pretty good at managing dotfiles. The primary way to manage
   # plain files is through 'home.file'.
   home.file = {
     # # Building this configuration will create a copy of 'dotfiles/screenrc' in
