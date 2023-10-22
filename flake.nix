@@ -12,27 +12,15 @@
   outputs = inputs@{ self, nix-darwin, nixpkgs, home-manager }:
   let
     configuration = { pkgs, ... }: {
-      # List packages installed in system profile. To search by name, run:
-      # $ nix-env -qaP | grep wget
-      environment.systemPackages =
-        [ 
-          pkgs.vim
-          pkgs.fzf
-          pkgs.pam-reattach
-          pkgs.coreutils-full
-        ];
 
-        fonts.fontDir.enable = true;
-        fonts.fonts = [
-          (pkgs.nerdfonts.override {fonts = ["FiraCode" "FiraMono" "IBMPlexMono"];})
-        ];
-        
+      # Set Git commit hash for darwin-version.
+      system.configurationRevision = self.rev or self.dirtyRev or null;
 
       # Auto upgrade nix package and the daemon service.
       services.nix-daemon.enable = true;
-      # nix.package = pkgs.nix;
 
       users.users.n3utrino.home = "/Users/n3utrino";
+
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
@@ -42,37 +30,30 @@
         enableFzfCompletion = true;
       };
 
-      # Set Git commit hash for darwin-version.
-      system.configurationRevision = self.rev or self.dirtyRev or null;
-
-      system.defaults.finder = {
-        AppleShowAllExtensions = true;
-        AppleShowAllFiles = true;
-      };
-
-      system.defaults.dock = {
-        orientation = "left";
-        autohide = true;
-      };
-
-      # Used for backwards compatibility, please read the changelog before changing.
-      # $ darwin-rebuild changelog
-      system.stateVersion = 4;
-
-      # enable fingerprint sudo 
-      security.pam.enableSudoTouchIdAuth = true;
-
-      # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "x86_64-darwin";
     };
   in
   {
     # Build darwin flake using:
-    # $ darwin-rebuild build --flake .#Gabes-MacBook-Pro
-    darwinConfigurations."Gabes-MacBook-Pro" = nix-darwin.lib.darwinSystem {
+    # $ darwin-rebuild build --flake .#MBP-Gabe
+    darwinConfigurations."MBP-Gabe" = nix-darwin.lib.darwinSystem {
       modules = [ 
+        ./modules/darwin/config.nix
         configuration
         home-manager.darwinModules.home-manager {
+          home-manager.useGlobalPkgs = true;
+          home-manager.useUserPackages = true;
+          home-manager.users.n3utrino = import ./home.nix;
+        }
+      ];
+
+
+    };
+
+    vmConfigurations."genericVm" = nixpkgs.lib.nixosSystem {
+      system = "x86_64-linux";
+      modules = [
+        configuration
+        home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.users.n3utrino = import ./home.nix;
@@ -81,6 +62,6 @@
     };
 
     # Expose the package set, including overlays, for convenience.
-    darwinPackages = self.darwinConfigurations."Gabes-MacBook-Pro".pkgs;
+    darwinPackages = self.darwinConfigurations."MBP-Gabe".pkgs;
   };
 }
