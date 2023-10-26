@@ -16,26 +16,14 @@
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
 
-      # Auto upgrade nix package and the daemon service.
-      services.nix-daemon.enable = true;
-
       users.users.n3utrino.home = "/Users/n3utrino";
-
-      # Necessary for using flakes on this system.
-      nix.settings.experimental-features = "nix-command flakes";
-
-      # Create /etc/zshrc that loads the nix-darwin environment.
-      programs.zsh = {
-        enable = true;  # default shell on catalina
-        enableFzfCompletion = true;
-      };
 
     };
   in
   {
     # Build darwin flake using:
     # $ darwin-rebuild build --flake .#MBP-Gabe
-    darwinConfigurations."MBP-Gabe" = nix-darwin.lib.darwinSystem {
+    darwinConfigurations.default = nix-darwin.lib.darwinSystem {
       modules = [ 
         ./modules/darwin/config.nix
         configuration

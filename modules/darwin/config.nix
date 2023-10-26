@@ -20,6 +20,11 @@
         autohide = true;
       };
 
+      # Auto upgrade nix package and the daemon service.
+      services.nix-daemon.enable = true;
+
+      # Necessary for using flakes on this system.
+      nix.settings.experimental-features = "nix-command flakes";
 
       environment.systemPackages = [ 
         pkgs.vim
@@ -28,6 +33,12 @@
         pkgs.coreutils-full
       ];
 
+      # Create /etc/zshrc that loads the nix-darwin environment.
+      programs.zsh = {
+        enable = true;  # default shell on catalina
+        enableFzfCompletion = true;
+      };
+      
       fonts.fontDir.enable = true;
       fonts.fonts = [
         (pkgs.nerdfonts.override {fonts = ["FiraCode" "FiraMono" "IBMPlexMono"];})
