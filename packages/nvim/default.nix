@@ -5,13 +5,16 @@
     viAlias = true;
     vimAlias = true;
 
+
     plugins = with pkgs.vimPlugins; [
-      vim-nix
+#      vim-nix
       telescope-nvim
       nvim-web-devicons
       gitsigns-nvim
       vim-numbertoggle
-      ale
+#      ale
+#      nvim-treesitter
+#      nvim-treesitter.withAllGrammars
     ];
 
     extraPackages = with pkgs;

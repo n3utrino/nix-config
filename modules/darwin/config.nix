@@ -33,6 +33,13 @@
         pkgs.coreutils-full
       ];
 
+
+      environment.shellAliases = {
+	nix-switch="darwin-rebuild switch --flake ~/.config/nix-darwin";
+	nix-config = "nvim ~/.config/nix-darwin";
+        nix-update = "nix flake upate ~/.config/nix-darwin";
+      };
+
       # Create /etc/zshrc that loads the nix-darwin environment.
       programs.zsh = {
         enable = true;  # default shell on catalina
