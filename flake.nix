@@ -27,14 +27,15 @@
     # $ darwin-rebuild build --flake .#MBP-Gabe
     darwinConfigurations."Gabes-MacBook-Pro" = nix-darwin.lib.darwinSystem {
       modules = [ 
-        ./modules/darwin/config.nix
+        ./modules/darwin
         configuration
         home-manager.darwinModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.n3utrino = import ./home.nix;
+          home-manager.users.n3utrino.imports = [./modules/home-manager];
         }
       ];
+
 
     };
 
