@@ -15,7 +15,6 @@
 imports = [ ../../packages/nvim ../../packages/alacritty ];
 
   home.packages = [
-    pkgs.fish
     pkgs.prettyping
     pkgs.nodejs
     pkgs.nodePackages."@angular/cli"
@@ -46,10 +45,19 @@ imports = [ ../../packages/nvim ../../packages/alacritty ];
   };
 
   programs = {
+    git =  {
+      enable = true;
+      extraConfig = {
+        user.email = "gabe@dehei.me";
+        user.name = "Gabe";
+      };
+    };
     java.enable=true;
     direnv.enable=true;
-    zsh.enable=true;
-    fish.enable=true;
+
+    zsh = { 
+      enable=true;
+    };
   };
 
       programs.tmux = {
