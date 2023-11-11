@@ -18,8 +18,6 @@
       # Set Git commit hash for darwin-version.
       system.configurationRevision = self.rev or self.dirtyRev or null;
 
-      users.users.n3utrino.home = "/Users/n3utrino";
-
     };
   in
   {
@@ -39,14 +37,15 @@
 
     };
 
-    vmConfigurations."genericVm" = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."nixtop" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
         configuration
+        ./hosts/nixtop
         home-manager.nixosModules.home-manager {
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
-          home-manager.users.n3utrino = import ./home.nix;
+          home-manager.users.n3utrino.imports = [./modules/home-manager];
         }
       ];
     };

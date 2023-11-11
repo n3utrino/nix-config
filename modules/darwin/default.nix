@@ -4,6 +4,8 @@
       # $ darwin-rebuild changelog
       system.stateVersion = 4;
 
+      users.users.n3utrino.home = "/Users/n3utrino";
+
       # enable fingerprint sudo 
       security.pam.enableSudoTouchIdAuth = true;
 
