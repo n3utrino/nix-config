@@ -48,8 +48,8 @@ imports = [ ../../packages/nvim ../../packages/alacritty ];
     git =  {
       enable = true;
       extraConfig = {
-        user.email = "gabe@dehei.me";
-        user.name = "Gabe";
+        user.email = "n3utrino@eleet.ch";
+        user.name = "n3utrino";
       };
     };
     java.enable=true;
