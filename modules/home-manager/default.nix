@@ -23,6 +23,7 @@ imports = [ ../../packages/nvim ../../packages/alacritty ];
     pkgs.graphviz
     pkgs.imagemagick
     pkgs.nmap
+    pkgs.magic-wormhole-rs
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
     # # parentheses. Maybe you want to install Nerd Fonts with a limited number of
@@ -42,6 +43,7 @@ imports = [ ../../packages/nvim ../../packages/alacritty ];
 	ping = "prettyping";
         ls = "ls --color";
         ll = "ls -l --color";
+        wormhole = "wormhole-rs";
   };
 
   programs = {
