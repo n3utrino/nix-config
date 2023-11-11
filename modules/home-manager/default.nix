@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
   # This value determines the Home Manager release that your configuration is
@@ -12,13 +12,9 @@
 
   # The home.packages option allows you to install Nix packages into your
   # environment.
-imports = [ ./vim.nix ./terminal.nix ];
+imports = [ ../../packages/nvim ../../packages/alacritty ];
 
   home.packages = [
-    # # Adds the 'hello' command to your environment. It prints a friendly
-    # # "Hello, world!" when run.
-    # pkgs.hello
-    pkgs.fish
     pkgs.prettyping
     pkgs.nodejs
     pkgs.nodePackages."@angular/cli"
@@ -41,21 +37,28 @@ imports = [ ./vim.nix ./terminal.nix ];
     # '')
   ];
 
-  home.shellAliases = {
+  home.shellAliases = 
+    {
 	ping = "prettyping";
-	nix-switch = "darwin-rebuild switch --flake ~/.config/nix-darwin";
-	nix-config = "nvim ~/.config/nix-darwin";
-        nix-update = "nix-channel --update";
         ls = "ls --color";
         ll = "ls -l --color";
   };
 
   programs = {
-  	java.enable=true;
-  	direnv.enable=true;
-  	zsh.enable=true;
-  	fish.enable=true;
+    git =  {
+      enable = true;
+      extraConfig = {
+        user.email = "gabe@dehei.me";
+        user.name = "Gabe";
       };
+    };
+    java.enable=true;
+    direnv.enable=true;
+
+    zsh = { 
+      enable=true;
+    };
+  };
 
       programs.tmux = {
         enable = true;
@@ -90,7 +93,7 @@ imports = [ ./vim.nix ./terminal.nix ];
   #
   # if you don't want to manage your shell through Home Manager.
   home.sessionVariables = {
-    # EDITOR = "emacs";
+     EDITOR = "nvim";
   };
 
   # Let Home Manager install and manage itself.

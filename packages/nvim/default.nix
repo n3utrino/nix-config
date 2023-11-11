@@ -1,27 +1,44 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 {
   programs.neovim = {
     enable = true;
     viAlias = true;
     vimAlias = true;
 
-    plugins = with pkgs.vimPlugins; [
+
+plugins = with pkgs.vimPlugins; [
       vim-nix
+      nvim-lspconfig
+      {
+        plugin = nvim-lspconfig;
+        config = lib.fileContents ./lspconfig.lua;
+      }
+      vim-lsp
       telescope-nvim
       nvim-web-devicons
       gitsigns-nvim
       vim-numbertoggle
-      ale
+#      ale
+      nvim-treesitter
+      {
+        plugin = nvim-treesitter;
+        config = lib.fileContents ./treesitter.lua;
+      }
+      nvim-treesitter.withAllGrammars
     ];
 
     extraPackages = with pkgs;
     [
-      ripgrep git fd
+      ripgrep 
+      git 
+      fd 
+      nixd
+      nodePackages_latest.typescript-language-server
     ];
 
 
     extraConfig = ''
-      let mapleader = "<"
+      let mapleader = ","
       " Configure Telescope
       " Find files using Telescope command-line sugar.
       nnoremap <leader>ff <cmd>Telescope find_files<cr>
