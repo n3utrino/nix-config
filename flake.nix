@@ -50,6 +50,19 @@
       ];
     };
 
+    nixosConfigurations."lab" = nixpkgs.lib.nixosSystem {
+	system = "x86_64-linux";
+	modules = [
+		configuration
+		./hosts/lab
+		home-manager.nixosModules.home-manager {
+			home-manager.useGlobalPkgs = true;
+			home-manager.useUserPackages = true;
+			home-manager.users.n3utrino.imports = [./modules/home-manager];
+		}
+	];
+    };
+
     # Expose the package set, including overlays, for convenience.
     darwinPackages = self.darwinConfigurations."MBP-Gabe".pkgs;
   };
