@@ -23,6 +23,7 @@ imports = [ ../../packages/nvim ../../packages/alacritty ];
     pkgs.graphviz
     pkgs.imagemagick
     pkgs.nmap
+    pkgs.difftastic
     pkgs.magic-wormhole-rs
     # # It is sometimes useful to fine-tune packages, for example, by applying
     # # overrides. You can do that directly here, just don't forget the
@@ -38,13 +39,13 @@ imports = [ ../../packages/nvim ../../packages/alacritty ];
     # '')
   ];
 
-  home.shellAliases = 
-    {
-	ping = "prettyping";
-        ls = "ls --color";
-        ll = "ls -l --color";
-        wormhole = "wormhole-rs";
-  };
+  #home.shellAliases = 
+  #  {
+#	ping = "prettyping";
+ #       ls = "ls --color";
+  #      ll = "ls -l --color";
+   #     wormhole = "wormhole-rs";
+ # };
 
   programs = {
     git =  {
