@@ -104,6 +104,9 @@ console.keyMap = "sg";
     storageDriver = "zfs";
     enable = true;
     extraOptions = "--data-root=/mnt/docker/data";
+    daemon.settings = {
+      dns = ["192.168.1.1" "8.8.8.8"];
+    };
   };
 
   # Enable the OpenSSH daemon.
@@ -259,6 +262,26 @@ console.keyMap = "sg";
     # extraFlags
   };
 
+  systemd.timers."nextcloud-tasks" = {
+    wantedBy = [ "timers.target" ];
+    timerConfig = {
+      OnBootSec = "5m";
+      OnUnitActiveSec = "5m";
+      Unit = "nextcloud-tasks.service";
+    };
+  };
+
+  systemd.services."nextcloud-tasks" = {
+
+    script = ''
+    ${pkgs.docker}/bin/docker exec -u www-data nextcloud-29 php /var/www/html/cron.php
+    '';
+
+    serviceConfig = {
+      Type = "oneshot";
+      User = "root";
+    };
+  };
 
   programs.zsh.enable = true;
   users.defaultUserShell = pkgs.zsh;
