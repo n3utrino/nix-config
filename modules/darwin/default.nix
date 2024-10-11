@@ -48,8 +48,7 @@
         enableFzfCompletion = true;
       };
       
-      fonts.fontDir.enable = true;
-      fonts.fonts = [
+      fonts.packages = [
         (pkgs.nerdfonts.override {fonts = ["FiraCode" "FiraMono" "IBMPlexMono"];})
       ];
 
