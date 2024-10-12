@@ -20,7 +20,7 @@
   nix.settings.experimental-features = ["nix-command" "flakes"];
 
   networking = {
-    hostId = "8425e349"; 	
+    hostId = "8425e349";
     hostName = "lab";
 #      domain = "int.eleet.ch";
  #     dhcpcd.enable = false;
@@ -80,7 +80,7 @@ console.keyMap = "sg";
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.n3utrino = {
     openssh.authorizedKeys.keys = [
-      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDnhwXlQtV4N8ZThRyydy2Mrq9Y9ZiwBy9He3JMLSRiyt9+abgevqI5AKpmcU1QSFZUDlH6aIDxJIpAJWLHvpAnNs0xVkDGDUm+2w6xMt7BhCICeX3aMyf0byboZez5HNiDyU/YzlUbpWEgLspMtJ3mC74H62/VeGnvLgKHj5AIYg6wiUXU6ao1JFgJIyKYfHtsMiiqPI34d0liFiCPy0h0zkJ/zAKKlYdGChbdrLPoufKbG7bqKR6+9Za8N4/LjEN9b4uE06o8ugB93Qg/WTU1v5r0jUwsvUTQY3Dz4vRJv02GJSAa48EKgY5bFLdJIkCUeVeu18d0GrDW8VWkm1sVxG5hTDL1c0R/a0KI63AmoLp4ebHDuXA3iBQpk/YiGSEP0iwJU8a9rsm/o0L58J5lQARsvNo4xmw18VK0jvmshyFwpUesWcZ3L7rxuuNBPPHPABVP4ypceiADo4+BvrMWlBMdodNxicX586J9EdilRwhuavS5/fctGqsImuhj1FU2x51rYQVRqP0F88guHt6jwhTFI46GEFChb1JhLLL0zlMdhMhHLJWAaeQ+kLBtHHjE9vTyBqbYA1TTp1NmxivFV3tL/lZEi39mzgWtLSZ7rUYM0s0kWp8Q31m5aOIBDz6Cz1Oc08F8SiTE2YRzhnWexlODg35/96SjksfvQhkRzQ== gabe@dehei.me"
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDnhwXlQtV4N8ZThRyydy2Mrq9Y9ZiwBy9He3JMLSRiyt9+abgevqI5AKpmcU1QSFZUDlH6aIDxJIpAJWLHvpAnNs0xVkDGDUm+2w6xMt7BhCICeX3aMyf0byboZez5HNiDyU/YzlUbpWEgLspMtJ3mC74H62/VeGnvLgKHj5AIYg6wiUXU6ao1JFgJIyKYfHtsMiiqPI34d0liFiCPy0h0zkJ/zAKKlYdGChbdrLPoufKbG7bqKR6+9Za8N4/LjEN9b4uE06o8ugB93Qg/WTU1v5r0jUwsvUTQY3Dz4vRJv02GJSAa48EKgY5bFLdJIkCUeVeu18d0GrDW8VWkm1sVxG5hTDL1c0R/a0KI63AmoLp4ebHDuXA3iBQpk/YiGSEP0iwJU8a9rsm/o0L58J5lQARsvNo4xmw18VK0jvmshyFwpUesWcZ3L7rxuuNBPPHPABVP4ypceiADo4+BvrMWlBMdodNxicX586J9EdilRwhuavS5/fctGqsImuhj1FU2x51rYQVRqP0F88guHt6jwhTFI46GEFChb1JhLLL0zlMdhMhHLJWAaeQ+kLBtHHjE9vTyBqbYA1TTp1NmxivFV3tL/lZEi39mzgWtLSZ7rUYM0s0kWp8Q31m5aOIBDz6Cz1Oc08F8SiTE2YRzhnWexlODg35/96SjksfvQhkRzQ== gabe"
     ];
     isNormalUser = true;
     shell = pkgs.zsh;
@@ -238,7 +238,7 @@ console.keyMap = "sg";
        #     source_labels = [ "__syslog_message_hostname" ];
        #     target_label = "host";
        #   }];
-       #     
+       #
        # }
         {
           job_name = "journal";
@@ -300,4 +300,3 @@ console.keyMap = "sg";
   system.stateVersion = "23.11"; # Did you read the comment?
 
 }
-
