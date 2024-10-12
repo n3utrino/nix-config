@@ -6,7 +6,7 @@
 
       users.users.n3utrino.home = "/Users/n3utrino";
 
-      # enable fingerprint sudo 
+      # enable fingerprint sudo
       security.pam.enableSudoTouchIdAuth = true;
 
       # The platform the configuration will be used on.
@@ -28,8 +28,9 @@
       # Necessary for using flakes on this system.
       nix.settings.experimental-features = "nix-command flakes";
 
-      environment.systemPackages = [ 
+      environment.systemPackages = [
         pkgs.vim
+        pkgs.nixd
         pkgs.fzf
         pkgs.pam-reattach
         pkgs.coreutils-full
@@ -37,8 +38,8 @@
 
 
       environment.shellAliases = {
-	nix-switch="darwin-rebuild switch --flake ~/.config/nix-darwin";
-	nix-config = "nvim ~/.config/nix-darwin";
+        nix-switch="darwin-rebuild switch --flake ~/.config/nix-darwin";
+        nix-config = "nvim ~/.config/nix-darwin";
         nix-update = "nix flake upate ~/.config/nix-darwin";
       };
 
@@ -47,10 +48,9 @@
         enable = true;  # default shell on catalina
         enableFzfCompletion = true;
       };
-      
+
       fonts.packages = [
         (pkgs.nerdfonts.override {fonts = ["FiraCode" "FiraMono" "IBMPlexMono"];})
       ];
 
     }
-

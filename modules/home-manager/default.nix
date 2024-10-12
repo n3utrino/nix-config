@@ -39,13 +39,13 @@ imports = [ ../../packages/nvim ];
     # '')
   ];
 
-  #home.shellAliases = 
-  #  {
-#	ping = "prettyping";
- #       ls = "ls --color";
-  #      ll = "ls -l --color";
-   #     wormhole = "wormhole-rs";
- # };
+  home.shellAliases =
+    {
+	ping = "prettyping";
+        ls = "ls --color";
+        ll = "ls -l --color";
+        wormhole = "wormhole-rs";
+  };
 
   programs = {
     git =  {
@@ -58,7 +58,7 @@ imports = [ ../../packages/nvim ];
     java.enable=true;
     direnv.enable=true;
 
-    zsh = { 
+    zsh = {
       enable=true;
     };
   };
@@ -66,7 +66,7 @@ imports = [ ../../packages/nvim ];
       programs.tmux = {
         enable = true;
         terminal = "tmux-256color";
-        plugins = with pkgs; 
+        plugins = with pkgs;
         [tmuxPlugins.nord];
       };
 
